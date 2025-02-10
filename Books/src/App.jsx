@@ -1,15 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useContext } from 'react'
+import BookCreate from "./components/BookCreate"
+import BookList from './components/BookList'
 import './App.css'
+import BooksContext from './context/books'
+import useBooksContext from './hooks/use-books-context'
 
 function App() {
 
-  const [books, setBooks] = useState([]);
+  const { fetchBooks } = useBooksContext();
+
+  useEffect(() => {
+    fetchBooks();
+  }, []);
 
   return (
-    <div>
-      App
+    <div className='app'>
+      <h1>Reading List</h1>
+      <BookList />
+      <BookCreate />
+
     </div>
   )
 }
